@@ -1,4 +1,4 @@
-package controller;
+package controller.employeeManager;
 
 import model.employee.Employee;
 

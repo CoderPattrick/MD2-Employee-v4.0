@@ -1,4 +1,4 @@
-package controller;
+package controller.employeeManager;
 
 import model.employee.Employee;
 
@@ -16,4 +16,7 @@ public abstract class EmployeeManager {
         this.target = target;
         setter=null;
     }
+    abstract void addEmployee();
+    abstract void removeEmployeeById();
+    abstract void setEmployeeInfo();
 }

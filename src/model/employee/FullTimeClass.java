@@ -1,7 +1,7 @@
 package model.employee;
 
 public class FullTimeClass extends FullTimeEmp{
-    public FullTimeClass(String id, String name, String age, String mail, double baseSalary, double bonus, double minus) {
+    public FullTimeClass(String id, String name, double age, String mail, double baseSalary, double bonus, double minus) {
         super(id, name, age, mail, baseSalary, bonus, minus);
     }
     public FullTimeClass() {

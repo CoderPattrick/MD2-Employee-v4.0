@@ -31,7 +31,7 @@ public abstract class FullTimeEmp extends Employee{
         this.baseSalary = baseSalary;
     }
 
-    public FullTimeEmp(String id, String name, String age, String mail, double baseSalary, double bonus, double minus) {
+    public FullTimeEmp(String id, String name, double age, String mail, double baseSalary, double bonus, double minus) {
         super(id, name, age, mail);
         this.baseSalary = baseSalary;
         this.bonus = bonus;

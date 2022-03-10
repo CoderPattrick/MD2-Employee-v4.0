@@ -18,11 +18,11 @@ public abstract class Employee implements Serializable {
         this.name = name;
     }
 
-    public String getAge() {
+    public double getAge() {
         return age;
     }
 
-    public void setAge(String age) {
+    public void setAge(double age) {
         this.age = age;
     }
 
@@ -36,7 +36,7 @@ public abstract class Employee implements Serializable {
 
     private String id;
     private String name;
-    private String age;
+    private double age;
     private String mail;
 
     public abstract double getSalary();
@@ -44,7 +44,7 @@ public abstract class Employee implements Serializable {
     public Employee() {
     }
 
-    public Employee(String id, String name, String age, String mail) {
+    public Employee(String id, String name, double age, String mail) {
         this.id = id;
         this.name = name;
         this.age = age;

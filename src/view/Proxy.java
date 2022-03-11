@@ -1,10 +1,24 @@
 package view;
 
-import controller.employeeManager.SetValid;
-import controller.employeeManager.SetValidDetail;
-import model.employee.Employee;
+import controller.employeeManager.EmployeeManager;
+import controller.employeeManager.*;
+import controller.getEmployeeInfo.*;
+import controller.infoDisplayer.ToScreen;
+import controller.userInput.Input;
+import model.employee.*;
+import storage.IOManager;
+
+import java.util.ArrayList;
 
 public class Proxy implements IProxy {
+    EmployeeManager empManager = new Manager();
+    GetEmployeeDetail getter = new GetDetail();
+    SetValidDetail empTypeSetter = new SetValid();
+    ToScreen toScreen = new ToScreen();
+    IOManager IOTool = new IOManager();
+    ArrayList<Employee> savedList = IOManager.savedList;
+    Input input = new Input();
+
     @Override
     public void waitASec(){
         try {
@@ -53,8 +67,26 @@ public class Proxy implements IProxy {
         toScreen.displayEmp(empToAdd);
         toScreen.displayBackToMenu();
     }
+    //done!
     @Override
-    public void removeEmp(){}
+    public void removeEmp(){
+        toScreen.inputId();
+        String id=getter.getIdByInput();
+        Employee removeTarget = getter.getEmployeeById(id);
+        if(removeTarget==null){
+            toScreen.displayEmpNotFound();
+        }else {
+            toScreen.displayEmp(removeTarget);
+            toScreen.displayConfirm();
+            boolean choice = input.confirmAction();
+            if (choice) {
+                savedList.remove(removeTarget);
+                IOTool.writeFile(savedList);
+                toScreen.displayCompletion();
+                toScreen.displayBackToMenu();
+            }
+        }
+    }
     @Override
     public void setEmp(){}
 

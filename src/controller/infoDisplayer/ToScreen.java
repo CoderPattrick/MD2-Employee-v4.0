@@ -41,6 +41,10 @@ public class ToScreen {
         System.out.print("Type of employee to add: ");
     }
     //done!
+    public void displayEmpNotFound(){
+        System.err.println("Employee not found!");
+    }
+    //done!
     public void displayInvalid(){
         System.err.println("Invalid! Please try again!");
     }
@@ -77,4 +81,9 @@ public class ToScreen {
         System.out.println("Enter Work-hour: ");
     }
     //done!
+    public void displayConfirm(){
+        System.out.println("1.OK  2.Cancel");
+        System.out.print("Confirm action: ");
+
+    }
 }

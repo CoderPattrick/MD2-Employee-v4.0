@@ -3,9 +3,9 @@ package controller.getEmployeeInfo;
 import model.employee.Employee;
 
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class GetDetail implements GetEmployeeDetail{
-    //All method 100% produce NullPointerException!!! must check size() before execute!
     @Override
     public int indexOfEmployeeById(String id) {
         for (int i = 0; i < savedList.size(); i++) {
@@ -75,5 +75,12 @@ public class GetDetail implements GetEmployeeDetail{
             //Just catch it and continue
         }
         return null;
+    }
+
+    @Override
+    public String getIdByInput() {
+        Scanner input = new Scanner(System.in);
+        String id = input.nextLine();
+        return id;
     }
 }

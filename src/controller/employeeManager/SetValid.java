@@ -83,11 +83,11 @@ public class SetValid extends SetValidDetail {
             System.err.print("Base-Salary is invalid! Try again: ");
             setValidBase();
         }
-        if(target instanceof FullTimeClass){
-            ((FullTimeClass)target).setBaseSalary(base);
+        if(target instanceof FullTimeEmp){
+            ((FullTimeEmp)target).setBaseSalary(base);
         }
         else {
-            ((LeaderClass)target).setBaseSalary(base);
+            ((Leader)target).setBaseSalary(base);
         }
     }
 
@@ -106,7 +106,7 @@ public class SetValid extends SetValidDetail {
             System.err.print("Bonus is in valid! Try again: ");
             setValidBonus();
         }
-        ((FullTimeClass)target).setBonus(bonus);
+        ((FullTimeEmp)target).setBonus(bonus);
     }
 
     @Override
@@ -124,7 +124,7 @@ public class SetValid extends SetValidDetail {
             System.err.print("Minus is invalid! Try again: ");
             setValidMinus();
         }
-        ((FullTimeClass)target).setMinus(minus);
+        ((FullTimeEmp)target).setMinus(minus);
     }
 
     @Override
@@ -142,6 +142,6 @@ public class SetValid extends SetValidDetail {
             System.err.print("Work-hour is invalid! Try again: ");
             setValidWorkHour();
         }
-        ((PartTimeClass)target).setWorkHour(workHour);
+        ((PartTimeEmp)target).setWorkHour(workHour);
     }
 }

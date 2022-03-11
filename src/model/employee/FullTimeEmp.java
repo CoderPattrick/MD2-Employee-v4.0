@@ -1,6 +1,6 @@
 package model.employee;
 
-public abstract class FullTimeEmp extends Employee{
+public class FullTimeEmp extends Employee{
     public static final int DEFAULT_BONUS = 1000;
     public static final int DEFAULT_MINUS = 0;
     private double baseSalary;
@@ -39,5 +39,21 @@ public abstract class FullTimeEmp extends Employee{
     }
 
     public FullTimeEmp() {
+    }
+
+    @Override
+    public double getSalary() {
+        double result = getBaseSalary() + getBonus() - getMinus();
+        return result;
+    }
+    @Override
+    public String toString() {
+        return "FullTimeEmp{" +
+                "id='" + getId()+ '\'' +
+                ", name='" + getName() + '\'' +
+                ", age='" + getAge() + '\'' +
+                ", mail='" + getMail() + '\'' +
+                ", baseSalary=" + getBaseSalary() +
+                '}';
     }
 }

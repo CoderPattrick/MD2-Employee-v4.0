@@ -1,5 +1,4 @@
 package controller.getEmployeeInfo;
-
 import model.employee.Employee;
 
 import java.util.ArrayList;

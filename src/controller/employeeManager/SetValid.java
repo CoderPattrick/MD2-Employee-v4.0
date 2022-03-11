@@ -11,8 +11,35 @@ import java.util.Scanner;
 public class SetValid extends SetValidDetail {
     private static final Regex regexTool = new Regex();
     private static final GetEmployeeDetail getter = new GetDetail();
+
+    public SetValid() {
+    }
+
+    public SetValid(int empType) {
+        super(empType);
+    }
+
     @Override
-    void setValidId() {
+    public void setValidTypeOfEmp() {
+        Scanner input = new Scanner(System.in);
+        int choice;
+        try {
+            choice = input.nextInt();
+        }
+        catch (InputMismatchException e){
+            System.err.print("Invalid! Try again: ");
+            setValidTypeOfEmp();
+            return;
+        }
+        if(choice!=1&&choice!=2&&choice!=3){
+            System.err.print("Invalid! Try again: ");
+            setValidTypeOfEmp();
+        }
+        empType = choice;
+    }
+
+    @Override
+    public void setValidId() {
         Scanner inputID = new Scanner(System.in);
         String id = inputID.nextLine();
         if (getter.indexOfEmployeeById(id)!=-1){
@@ -29,59 +56,65 @@ public class SetValid extends SetValidDetail {
     }
 
     @Override
-    void setValidName() {
+    public void setValidName() {
         Scanner input = new Scanner(System.in);
         String name = input.nextLine();
         if (!regexTool.isValidName(name)){
             System.err.print("Name is invalid! Try again: ");
             setValidName();
+            return;
         }
         target.setName(name);
     }
 
     @Override
-    void setValidAge() {
+    public void setValidAge() {
         Scanner input = new Scanner(System.in);
-        double age =0;
+        int age =0;
         try{
-            age = input.nextDouble();
+            age = input.nextInt();
         }
         catch (InputMismatchException e){
             System.err.print("Invalid! Try again: ");
             setValidAge();
+            return;
         }
-        if (!regexTool.isValidAge(age+"")){
+        if (!regexTool.isValidAge(""+age)){
             System.err.print("Age is invalid! Try again: ");
             setValidAge();
+            return;
         }
         target.setAge(age);
     }
 
     @Override
-    void setValidMail() {
+    public void setValidMail() {
         Scanner input = new Scanner(System.in);
         String mail = input.nextLine();
         if (!regexTool.isValidMail(mail)){
             System.err.print("Mail is invalid! Try again: ");
             setValidMail();
+            return;
         }
         target.setMail(mail);
     }
 
     @Override
-    void setValidBase() {
+    public void setValidBase() {
         Scanner input = new Scanner(System.in);
-        double base=0;
+        long base=0;
         try{
-            base = input.nextDouble();
+            base = input.nextLong();
         }
         catch (InputMismatchException e){
             System.err.print("Base-Salary is invalid! Try again: ");
             setValidBase();
+            return;
         }
-        if (!regexTool.isValidBase(base+"")){
+        if (!regexTool.isValidBase(""+base)){
             System.err.print("Base-Salary is invalid! Try again: ");
             setValidBase();
+            return;
         }
         if(target instanceof FullTimeEmp){
             ((FullTimeEmp)target).setBaseSalary(base);
@@ -92,55 +125,61 @@ public class SetValid extends SetValidDetail {
     }
 
     @Override
-    void setValidBonus() {
+    public void setValidBonus() {
         Scanner input = new Scanner(System.in);
-        double bonus=0;
+        int bonus;
         try{
-            bonus = input.nextDouble();
+            bonus = input.nextInt();
         }
         catch (InputMismatchException e){
             System.err.print("Invalid! Try again: ");
             setValidBonus();
+            return;
         }
         if (!regexTool.isValidBonus(""+bonus)){
             System.err.print("Bonus is in valid! Try again: ");
             setValidBonus();
+            return;
         }
         ((FullTimeEmp)target).setBonus(bonus);
     }
 
     @Override
-    void setValidMinus() {
+    public  void setValidMinus() {
         Scanner input = new Scanner(System.in);
-        double minus=0;
+        int minus;
         try{
-            minus = input.nextLong();
+            minus = input.nextInt();
         }
         catch (InputMismatchException e){
             System.err.print("Minus is invalid! Try again: ");
             setValidMinus();
+            return;
         }
-        if (!regexTool.isValidMinus(minus+"")){
+        if (!regexTool.isValidMinus(""+minus)){
             System.err.print("Minus is invalid! Try again: ");
             setValidMinus();
+            return;
         }
         ((FullTimeEmp)target).setMinus(minus);
     }
 
     @Override
-    void setValidWorkHour() {
+    public void setValidWorkHour() {
         Scanner input = new Scanner(System.in);
-        double workHour=0;
+        int workHour;
         try{
-            workHour = input.nextDouble();
+            workHour = input.nextInt();
         }
         catch (InputMismatchException e){
             System.err.print("Work-hour is invalid! Try again: ");
             setValidWorkHour();
+            return;
         }
         if (!regexTool.isValidWorkHour(""+workHour)){
             System.err.print("Work-hour is invalid! Try again: ");
             setValidWorkHour();
+            return;
         }
         ((PartTimeEmp)target).setWorkHour(workHour);
     }

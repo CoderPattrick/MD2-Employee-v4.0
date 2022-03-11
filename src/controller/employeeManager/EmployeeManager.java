@@ -14,9 +14,9 @@ public abstract class EmployeeManager {
 
     public EmployeeManager(Employee target) {
         this.target = target;
-        setter=null;
+        setter = new SetValid();
     }
-    abstract void addEmployee();
-    abstract void removeEmployeeById();
-    abstract void setEmployeeInfo();
+    abstract void addEmployee(Employee emp);
+    abstract void removeEmployeeById(String id);
+    abstract void setEmployeeInfo(Employee emp1,Employee emp2);
 }

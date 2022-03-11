@@ -9,9 +9,14 @@ public class GetDetail implements GetEmployeeDetail{
     @Override
     public int indexOfEmployeeById(String id) {
         for (int i = 0; i < savedList.size(); i++) {
-            Employee e = savedList.get(i);
-            if(e.getId().equals(id)){
-                return i;
+            try{
+                Employee e = savedList.get(i);
+                if(e.getId().equals(id)){
+                    return i;
+                }
+            }
+            catch (NullPointerException e){
+                //Just catch it and continue
             }
         }
         return -1;
@@ -20,9 +25,14 @@ public class GetDetail implements GetEmployeeDetail{
     @Override
     public int indexOfEmployeeByName(String name) {
         for (int i = 0; i < savedList.size(); i++) {
-            Employee e = savedList.get(i);
-            if(e.getName().equals(name)){
-                return i;
+            try{
+                Employee e = savedList.get(i);
+                if(e.getName().equals(name)){
+                    return i;
+                }
+            }
+            catch (NullPointerException e){
+                //Just catch it and continue
             }
         }
         return -1;
@@ -52,5 +62,18 @@ public class GetDetail implements GetEmployeeDetail{
             }
         }
         return tempList;
+    }
+
+    @Override
+    public Employee getEmployeeById(String id){
+        int index = indexOfEmployeeById(id);
+        try{
+            Employee emp = savedList.get(index);
+            return emp;
+        }
+        catch (NullPointerException e){
+            //Just catch it and continue
+        }
+        return null;
     }
 }

@@ -8,7 +8,7 @@ import java.util.ArrayList;
 public class IOManager {
     public static IOManager IOtool = new IOManager();
     public static ArrayList<Employee> savedList = IOtool.readFile();
-    public static final String SAVE_PATH = "storage\\savePath\\employeeList.dat";
+    public static final String SAVE_PATH = "src\\storage\\savePath\\employeeList.dat";
 
 
 
@@ -40,6 +40,11 @@ public class IOManager {
             fos = new FileOutputStream(SAVE_PATH);
         } catch (FileNotFoundException e) {
             System.err.println("File not found, created new one!");
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException ex) {
+                ex.printStackTrace();
+            }
             writeFile(list);
             return;
         }

@@ -43,8 +43,7 @@ public class FullTimeEmp extends Employee{
 
     @Override
     public double getSalary() {
-        double result = getBaseSalary() + getBonus() - getMinus();
-        return result;
+        return getBaseSalary() + getBonus() - getMinus();
     }
     @Override
     public String toString() {

@@ -41,27 +41,37 @@ public class GetDetail implements GetEmployeeDetail{
     @Override
     public ArrayList<Employee> getEmployeeByAge(double from, double to) {
         ArrayList<Employee> tempList = new ArrayList<>();
+        boolean found = false;
         for (Employee e:savedList
              ) {
             double age = e.getAge();
             if(age>=from && age<=to){
                 tempList.add(e);
+                found = true;
             }
         }
-        return tempList;
+        if(found){
+            return tempList;
+        }
+        return null;
     }
 
     @Override
     public ArrayList<Employee> getEmployeeByAge(double age) {
         ArrayList<Employee> tempList = new ArrayList<>();
+        boolean found = false;
         for (Employee e:savedList
         ) {
             double ageEmp = e.getAge();
             if(age==ageEmp){
                 tempList.add(e);
+                found = true;
             }
         }
-        return tempList;
+       if(found){
+           return tempList;
+       }
+       return null;
     }
 
     @Override
@@ -71,16 +81,29 @@ public class GetDetail implements GetEmployeeDetail{
             Employee emp = savedList.get(index);
             return emp;
         }
-        catch (NullPointerException e){
+        catch (IndexOutOfBoundsException e){
             //Just catch it and continue
         }
         return null;
     }
-
+    @Override
+    public Employee getEmployeeByName(String name) {
+        int index = indexOfEmployeeByName(name);
+        try{
+            Employee emp = savedList.get(index);
+            return emp;
+        }
+        catch (IndexOutOfBoundsException e){
+            //Just catch it and continue
+        }
+        return null;
+    }
     @Override
     public String getIdByInput() {
         Scanner input = new Scanner(System.in);
         String id = input.nextLine();
         return id;
     }
+
+
 }

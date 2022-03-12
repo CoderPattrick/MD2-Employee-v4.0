@@ -6,4 +6,5 @@ public interface IProxy {
      void removeEmp();
      void setEmp();
      void displayAllList();
+     void searchEmployee();
 }

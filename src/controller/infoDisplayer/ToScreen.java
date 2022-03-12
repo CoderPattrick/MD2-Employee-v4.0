@@ -31,7 +31,7 @@ public class ToScreen {
     }
     //done!
     public void displayBackToMenu(){
-        System.out.println("\nNhấn phím Enter để quay lại menu");
+        System.out.println("\nPress Enter to move back to menu.");
         Scanner input = new Scanner(System.in);
         String i=input.nextLine();
     }
@@ -41,6 +41,14 @@ public class ToScreen {
         System.out.print("Type of employee to add: ");
     }
     //done!
+    public void displayKindOfSearch(){
+        System.out.println("1.Search by Id  2.Search by Name  3.Search by age");
+        System.out.print("Your choice: ");
+    }
+    public void displayKindOfAgeSearch(){
+        System.out.println("1.Search by age  2.Search by range of age");
+        System.out.print("Your choice: ");
+    }
     public void displayEmpNotFound(){
         System.err.println("Employee not found!");
     }
@@ -84,6 +92,20 @@ public class ToScreen {
     public void displayConfirm(){
         System.out.println("1.OK  2.Cancel");
         System.out.print("Confirm action: ");
+    }
+    public void lazyLoad1sec(){
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            System.err.println("Thread interrupted!");
+        }
+    }
 
+    public void displayAgeFrom() {
+        System.out.print("From: ");
+    }
+    public void displayAgeTo() {
+        System.out.print("To: ");
     }
 }
+

@@ -65,6 +65,7 @@ public class Proxy implements IProxy {
         IOTool.writeFile(savedList);
         toScreen.displayCompletion();
         toScreen.displayEmp(empToAdd);
+        toScreen.lazyLoad1sec();
         toScreen.displayBackToMenu();
     }
     //done!
@@ -75,6 +76,8 @@ public class Proxy implements IProxy {
         Employee removeTarget = getter.getEmployeeById(id);
         if(removeTarget==null){
             toScreen.displayEmpNotFound();
+            toScreen.lazyLoad1sec();
+            toScreen.displayBackToMenu();
         }else {
             toScreen.displayEmp(removeTarget);
             toScreen.displayConfirm();
@@ -83,10 +86,76 @@ public class Proxy implements IProxy {
                 savedList.remove(removeTarget);
                 IOTool.writeFile(savedList);
                 toScreen.displayCompletion();
+                toScreen.lazyLoad1sec();
                 toScreen.displayBackToMenu();
             }
         }
     }
+    //done!
+
+    @Override
+    public void searchEmployee() {
+        toScreen.displayKindOfSearch();
+        String choice = input.inputKindOfSearch();
+        Employee emp;
+        boolean found = true;
+        switch (choice){
+            case "1":
+                toScreen.inputId();
+                String id = input.inputId();
+                emp = getter.getEmployeeById(id);
+                if(emp==null){
+                    toScreen.displayEmpNotFound();
+                    found = false;
+                }
+                else {
+                    toScreen.displayEmp(emp);
+                }
+                break;
+            case "2":
+                toScreen.inputName();
+                String name = input.inputName();
+                emp = getter.getEmployeeByName(name);
+                if(emp==null){
+                    toScreen.displayEmpNotFound();
+                    found = false;
+                }
+                else {
+                    toScreen.displayEmp(emp);
+                }
+                break;
+            case "3":
+                ArrayList<Employee> tempList=null;
+                toScreen.displayKindOfAgeSearch();
+                String choice1 = input.inputKindOfAgeSearch();
+                switch (choice1) {
+                    case "1":
+                        toScreen.inputAge();
+                        int age = input.inputAge();
+                        tempList = getter.getEmployeeByAge(age);
+                        break;
+                    case "2":
+                        toScreen.displayAgeFrom();
+                        int from = input.inputAge();
+                        toScreen.displayAgeTo();
+                        int to = input.inputAge();
+                        tempList = getter.getEmployeeByAge(from,to);
+                }
+                if(tempList==null){
+                    toScreen.displayEmpNotFound();
+                    found = false;
+                }
+                else {
+                    toScreen.displaySpecifiedList(tempList);
+                }
+        }
+        if(found){
+            toScreen.displayCompletion();
+        }
+        toScreen.lazyLoad1sec();
+        toScreen.displayBackToMenu();
+    }
+
     @Override
     public void setEmp(){}
 

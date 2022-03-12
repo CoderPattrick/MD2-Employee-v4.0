@@ -12,4 +12,5 @@ public interface GetEmployeeDetail {
     ArrayList<Employee> getEmployeeByAge(double age);
     Employee getEmployeeById(String id);
     String getIdByInput();
+    Employee getEmployeeByName(String name);
 }

@@ -4,7 +4,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Regex {
-    private final String regexID="^[fp]\\d+$";
+    private final String regexID="^[fpl]\\d+$";
     private final String regexName="^[a-zA-Z]+(?:[\\s.]+[a-zA-Z]+)*$";
     private final String regexAge="\\d{2}";
     private final String regexBonus="\\d{0,4}";

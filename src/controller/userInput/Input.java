@@ -27,7 +27,7 @@ public class Input {
             case "3":
                 return choice;
             default:
-                toScreen.displayInvalid();
+                toScreen.displayInvalidAndTryAgain();
                 return inputKindOfSearch();
         }
     }
@@ -49,7 +49,7 @@ public class Input {
             return age;
         }
         catch (InputMismatchException e){
-            toScreen.displayInvalid();
+            toScreen.displayInvalidAndTryAgain();
             return inputAge();
         }
     }
@@ -61,8 +61,43 @@ public class Input {
             case "2":
                 return choice;
             default:
-                toScreen.displayInvalid();
+                toScreen.displayInvalidAndTryAgain();
                 return inputKindOfAgeSearch();
+        }
+    }
+    public String inputChoiceOfSetting(String empType){
+        Scanner input = new Scanner(System.in);
+        String choice = input.nextLine();
+        switch (choice){
+            case "1":
+            case "2":
+            case "3":
+            case "4":
+                return choice;
+            default:
+                switch (empType) {
+                    case "1":
+                        switch (choice) {
+                            case "5":
+                            case "6":
+                            case "7":
+                                return choice;
+                            default:
+                                toScreen.displayInvalidAndTryAgain();
+                                return inputChoiceOfSetting(empType);
+                        }
+                    case "2":
+                    case "3":
+                        switch (choice) {
+                            case "5":
+                                return choice;
+                            default:
+                                toScreen.displayInvalidAndTryAgain();
+                                return inputChoiceOfSetting(empType);
+                        }
+                    default:
+                        return "";
+                }
         }
     }
 }

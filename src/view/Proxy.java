@@ -11,7 +11,7 @@ import storage.IOManager;
 import java.util.ArrayList;
 
 public class Proxy implements IProxy {
-    EmployeeManager empManager = new Manager();
+    EmployeeManager empManager;
     GetEmployeeDetail getter = new GetDetail();
     SetValidDetail empTypeSetter = new SetValid();
     ToScreen toScreen = new ToScreen();
@@ -32,7 +32,7 @@ public class Proxy implements IProxy {
     public void addEmp(){
         toScreen.displayKindaEmpToAdd();
         empTypeSetter.setValidTypeOfEmp();
-        int type = empTypeSetter.empType;
+        String type = empTypeSetter.empType;
         SetValidDetail setter = new SetValid(type);
 
         toScreen.inputId();
@@ -44,7 +44,7 @@ public class Proxy implements IProxy {
         toScreen.inputMail();
         setter.setValidMail();
         switch (type){
-            case 1:
+            case "1":
                 toScreen.inputBase();
                 setter.setValidBase();
                 toScreen.inputBonus();
@@ -52,15 +52,15 @@ public class Proxy implements IProxy {
                 toScreen.inputMinus();
                 setter.setValidMinus();
                 break;
-            case 2:
+            case "2":
                 toScreen.inputWorkHour();
                 setter.setValidWorkHour();
                 break;
-            case 3:
+            case "3":
                 toScreen.inputBase();
                 setter.setValidBase();
         }
-        Employee empToAdd = setter.target;
+        Employee empToAdd = setter.tempEmp;
         savedList.add(empToAdd);
         IOTool.writeFile(savedList);
         toScreen.displayCompletion();
@@ -72,7 +72,7 @@ public class Proxy implements IProxy {
     @Override
     public void removeEmp(){
         toScreen.inputId();
-        String id=getter.getIdByInput();
+        String id=input.inputId();
         Employee removeTarget = getter.getEmployeeById(id);
         if(removeTarget==null){
             toScreen.displayEmpNotFound();
@@ -92,7 +92,6 @@ public class Proxy implements IProxy {
         }
     }
     //done!
-
     @Override
     public void searchEmployee() {
         toScreen.displayKindOfSearch();
@@ -155,12 +154,72 @@ public class Proxy implements IProxy {
         toScreen.lazyLoad1sec();
         toScreen.displayBackToMenu();
     }
-
+    //done!
     @Override
-    public void setEmp(){}
+    public void setEmp(){
+        toScreen.inputIdToSetup();
+        String id = input.inputId();
+        Employee target = getter.getEmployeeById(id);
+        if(target==null){
+            toScreen.displayEmpNotFound();
+        }
+        else {
+            String type = getter.getEmployeeType(target);
+            empManager = new Manager(target);
+            toScreen.displayEmpInfoToSet(type);
+            boolean continueSetup = true;
+            empManager.setter.tempEmp = target;
+            while (continueSetup) {
+                String choice = input.inputChoiceOfSetting(type);
+                switch (choice) {
+                    case "1":
+                        target.setId("");
+                        empManager.setter.setValidId();
+                        break;
+                    case "2":
+                        empManager.setter.setValidName();
+                        break;
+                    case "3":
+                        empManager.setter.setValidAge();
+                        break;
+                    case "4":
+                        empManager.setter.setValidMail();
+                        break;
+                    default:
+                        switch (type){
+                            case "1":
+                                switch (choice){
+                                    case "5":
+                                        empManager.setter.setValidBase();
+                                        break;
+                                    case "6":
+                                        empManager.setter.setValidBonus();
+                                        break;
+                                    case "7":
+                                        empManager.setter.setValidMinus();
+                                }
+                                break;
+                            case "2":
+                                empManager.setter.setValidWorkHour();
+                                break;
+                            case "3":
+                                empManager.setter.setValidBase();
+                        }
+                }
+                toScreen.displayCompletion();
+                toScreen.displayEmp(target);
+                toScreen.displayConfirmContinueSetting();
+                continueSetup = input.confirmAction();
+            }
+            IOTool.writeFile(savedList);
+            toScreen.lazyLoad1sec();
+            toScreen.displayBackToMenu();
+        }
+    }
 
     @Override
     public void displayAllList() {
         toScreen.displayAllList();
     }
+    //done!
 }

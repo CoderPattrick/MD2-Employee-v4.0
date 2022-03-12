@@ -2,6 +2,7 @@ package controller.employeeManager;
 
 import controller.getEmployeeInfo.GetDetail;
 import controller.getEmployeeInfo.GetEmployeeDetail;
+import controller.infoDisplayer.ToScreen;
 import model.employee.*;
 import model.employee.employeeRegex.Regex;
 
@@ -9,33 +10,32 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class SetValid extends SetValidDetail {
+    private static final ToScreen toScreen = new ToScreen();
     private static final Regex regexTool = new Regex();
     private static final GetEmployeeDetail getter = new GetDetail();
 
     public SetValid() {
     }
 
-    public SetValid(int empType) {
+    public SetValid(String empType) {
         super(empType);
     }
 
     @Override
     public void setValidTypeOfEmp() {
         Scanner input = new Scanner(System.in);
-        int choice;
-        try {
-            choice = input.nextInt();
+        String choice = input.nextLine();
+        switch (choice){
+            case "1":
+            case "2":
+            case "3":
+                empType = choice;
+                break;
+            default:
+                toScreen.displayInvalidAndTryAgain();
+                setValidTypeOfEmp();
         }
-        catch (InputMismatchException e){
-            System.err.print("Invalid! Try again: ");
-            setValidTypeOfEmp();
-            return;
-        }
-        if(choice!=1&&choice!=2&&choice!=3){
-            System.err.print("Invalid! Try again: ");
-            setValidTypeOfEmp();
-        }
-        empType = choice;
+
     }
 
     @Override
@@ -52,7 +52,7 @@ public class SetValid extends SetValidDetail {
             setValidId();
             return;
         }
-        target.setId(id);
+        tempEmp.setId(id);
     }
 
     @Override
@@ -64,13 +64,13 @@ public class SetValid extends SetValidDetail {
             setValidName();
             return;
         }
-        target.setName(name);
+        tempEmp.setName(name);
     }
 
     @Override
     public void setValidAge() {
         Scanner input = new Scanner(System.in);
-        int age =0;
+        int age;
         try{
             age = input.nextInt();
         }
@@ -84,7 +84,7 @@ public class SetValid extends SetValidDetail {
             setValidAge();
             return;
         }
-        target.setAge(age);
+        tempEmp.setAge(age);
     }
 
     @Override
@@ -96,7 +96,7 @@ public class SetValid extends SetValidDetail {
             setValidMail();
             return;
         }
-        target.setMail(mail);
+        tempEmp.setMail(mail);
     }
 
     @Override
@@ -116,11 +116,11 @@ public class SetValid extends SetValidDetail {
             setValidBase();
             return;
         }
-        if(target instanceof FullTimeEmp){
-            ((FullTimeEmp)target).setBaseSalary(base);
+        if(tempEmp instanceof FullTimeEmp){
+            ((FullTimeEmp) tempEmp).setBaseSalary(base);
         }
         else {
-            ((Leader)target).setBaseSalary(base);
+            ((Leader) tempEmp).setBaseSalary(base);
         }
     }
 
@@ -141,7 +141,7 @@ public class SetValid extends SetValidDetail {
             setValidBonus();
             return;
         }
-        ((FullTimeEmp)target).setBonus(bonus);
+        ((FullTimeEmp) tempEmp).setBonus(bonus);
     }
 
     @Override
@@ -161,7 +161,7 @@ public class SetValid extends SetValidDetail {
             setValidMinus();
             return;
         }
-        ((FullTimeEmp)target).setMinus(minus);
+        ((FullTimeEmp) tempEmp).setMinus(minus);
     }
 
     @Override
@@ -181,6 +181,6 @@ public class SetValid extends SetValidDetail {
             setValidWorkHour();
             return;
         }
-        ((PartTimeEmp)target).setWorkHour(workHour);
+        ((PartTimeEmp) tempEmp).setWorkHour(workHour);
     }
 }

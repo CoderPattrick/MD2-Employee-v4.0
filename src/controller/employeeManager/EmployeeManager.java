@@ -1,12 +1,12 @@
 package controller.employeeManager;
 
+import controller.getEmployeeInfo.GetDetail;
+import controller.getEmployeeInfo.GetEmployeeDetail;
 import model.employee.Employee;
 
-import java.util.ArrayList;
-
 public abstract class EmployeeManager {
-    private static ArrayList<Employee> savedList;
-    private static SetValidDetail setter;
+    public SetValidDetail setter;
+    private static GetEmployeeDetail getter = new GetDetail();
     private Employee target;
 
     public EmployeeManager() {
@@ -14,7 +14,8 @@ public abstract class EmployeeManager {
 
     public EmployeeManager(Employee target) {
         this.target = target;
-        setter = new SetValid();
+        String type =getter.getEmployeeType(target);
+        setter = new SetValid(type);
     }
     abstract void addEmployee(Employee emp);
     abstract void removeEmployeeById(String id);

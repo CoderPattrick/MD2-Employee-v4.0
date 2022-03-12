@@ -8,6 +8,11 @@ import java.util.ArrayList;
 public class Manager extends EmployeeManager{
     private static ArrayList<Employee> savedList = IOManager.savedList;
     private static GetEmployeeDetail getter = new GetDetail();
+
+    public Manager(Employee target) {
+        super(target);
+    }
+
     @Override
     void addEmployee(Employee e) {
         savedList.add(e);

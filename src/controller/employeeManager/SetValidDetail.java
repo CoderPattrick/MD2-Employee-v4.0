@@ -6,27 +6,23 @@ import model.employee.Leader;
 import model.employee.PartTimeEmp;
 
 public abstract class SetValidDetail {
-    public Employee target;
-    public int empType;
+    public Employee tempEmp;
+    public String empType;
 
     public SetValidDetail() {
     }
 
-    public SetValidDetail(Employee target) {
-        this.target = target;
-    }
-
-    public SetValidDetail(int empType) {
+    public SetValidDetail(String empType) {
         this.empType=empType;
         switch (empType){
-            case 1:
-                target=new FullTimeEmp();
+            case "1":
+                tempEmp =new FullTimeEmp();
                 break;
-            case 2:
-                target=new PartTimeEmp();
+            case "2":
+                tempEmp =new PartTimeEmp();
                 break;
-            case 3:
-                target=new Leader();
+            case "3":
+                tempEmp =new Leader();
         }
     }
     public abstract void setValidTypeOfEmp();

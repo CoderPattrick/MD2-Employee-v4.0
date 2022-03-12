@@ -1,11 +1,15 @@
 package controller.getEmployeeInfo;
 
 import model.employee.Employee;
-
+import model.employee.FullTimeEmp;
+import model.employee.Leader;
+import model.employee.PartTimeEmp;
+import storage.IOManager;
 import java.util.ArrayList;
-import java.util.Scanner;
+
 
 public class GetDetail implements GetEmployeeDetail{
+    ArrayList<Employee> savedList= IOManager.savedList;
     @Override
     public int indexOfEmployeeById(String id) {
         for (int i = 0; i < savedList.size(); i++) {
@@ -98,12 +102,12 @@ public class GetDetail implements GetEmployeeDetail{
         }
         return null;
     }
+
     @Override
-    public String getIdByInput() {
-        Scanner input = new Scanner(System.in);
-        String id = input.nextLine();
-        return id;
+    public String getEmployeeType(Employee emp) {
+        if(emp instanceof FullTimeEmp){return "1";}
+        else if(emp instanceof PartTimeEmp){return "2";}
+        else if(emp instanceof Leader){return "3";}
+        return "";
     }
-
-
 }

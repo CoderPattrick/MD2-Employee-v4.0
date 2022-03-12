@@ -8,6 +8,7 @@ import java.util.Scanner;
 
 public class ToScreen {
     public static ArrayList<Employee> savedList = IOManager.savedList;
+
     public void displayAllList(){
         for (Employee e:savedList
              ) {
@@ -45,20 +46,60 @@ public class ToScreen {
         System.out.println("1.Search by Id  2.Search by Name  3.Search by age");
         System.out.print("Your choice: ");
     }
+    public void displayAgeFrom() {
+        System.out.print("From: ");
+    }
+    //done!
+    public void displayAgeTo() {
+        System.out.print("To: ");
+    }
+    //done!
     public void displayKindOfAgeSearch(){
         System.out.println("1.Search by age  2.Search by range of age");
         System.out.print("Your choice: ");
+    }
+    //done!
+    public void displayCommonSetting(){
+        System.out.print("1.Id  2.Name  3.Age  4.Mail");
+    }
+    //done!
+    public void displayEmpInfoToSet(String empType){
+        displayCommonSetting();
+        switch (empType){
+            case "1":
+                System.out.println("5.Base-salary  6.Bonus  7.Minus");
+                break;
+                case "2":
+                System.out.println("5.Work-hour");
+                break;
+            case "3":
+                System.out.println("5. Base-salary");
+        }
+        System.out.println("Your choice: ");
     }
     public void displayEmpNotFound(){
         System.err.println("Employee not found!");
     }
     //done!
-    public void displayInvalid(){
+    public void displayInvalidAndTryAgain(){
         System.err.println("Invalid! Please try again!");
     }
     //done!
+    public void displayConfirm(){
+        System.out.println("1.OK  2.Cancel");
+        System.out.print("Confirm action: ");
+    }
+    //done!
+    public void displayConfirmContinueSetting(){
+        System.out.println("1.Yes  2.No");
+        System.out.print("Continue setting: ");
+    }
     public void inputId(){
         System.out.print("Enter Id: ");
+    }
+    //done!
+    public void inputIdToSetup(){
+        System.out.print("Enter id of Employee to set information: ");
     }
     //done!
     public void inputName(){
@@ -89,10 +130,7 @@ public class ToScreen {
         System.out.println("Enter Work-hour: ");
     }
     //done!
-    public void displayConfirm(){
-        System.out.println("1.OK  2.Cancel");
-        System.out.print("Confirm action: ");
-    }
+
     public void lazyLoad1sec(){
         try {
             Thread.sleep(1000);
@@ -100,12 +138,7 @@ public class ToScreen {
             System.err.println("Thread interrupted!");
         }
     }
+    //done!
 
-    public void displayAgeFrom() {
-        System.out.print("From: ");
-    }
-    public void displayAgeTo() {
-        System.out.print("To: ");
-    }
 }
 

@@ -166,23 +166,27 @@ public class Proxy implements IProxy {
         else {
             String type = getter.getEmployeeType(target);
             empManager = new Manager(target);
-            toScreen.displayEmpInfoToSet(type);
             boolean continueSetup = true;
             empManager.setter.tempEmp = target;
             while (continueSetup) {
+                toScreen.displayEmpInfoToSet(type);
                 String choice = input.inputChoiceOfSetting(type);
                 switch (choice) {
                     case "1":
                         target.setId("");
+                        toScreen.inputId();
                         empManager.setter.setValidId();
                         break;
                     case "2":
+                        toScreen.inputName();
                         empManager.setter.setValidName();
                         break;
                     case "3":
+                        toScreen.inputAge();
                         empManager.setter.setValidAge();
                         break;
                     case "4":
+                        toScreen.inputMail();
                         empManager.setter.setValidMail();
                         break;
                     default:
@@ -190,19 +194,24 @@ public class Proxy implements IProxy {
                             case "1":
                                 switch (choice){
                                     case "5":
+                                        toScreen.inputBase();
                                         empManager.setter.setValidBase();
                                         break;
                                     case "6":
+                                        toScreen.inputBonus();
                                         empManager.setter.setValidBonus();
                                         break;
                                     case "7":
+                                        toScreen.inputMinus();
                                         empManager.setter.setValidMinus();
                                 }
                                 break;
                             case "2":
+                                toScreen.inputWorkHour();
                                 empManager.setter.setValidWorkHour();
                                 break;
                             case "3":
+                                toScreen.inputBase();
                                 empManager.setter.setValidBase();
                         }
                 }
@@ -212,11 +221,11 @@ public class Proxy implements IProxy {
                 continueSetup = input.confirmAction();
             }
             IOTool.writeFile(savedList);
-            toScreen.lazyLoad1sec();
-            toScreen.displayBackToMenu();
         }
+        toScreen.lazyLoad1sec();
+        toScreen.displayBackToMenu();
     }
-
+    //done!
     @Override
     public void displayAllList() {
         toScreen.displayAllList();

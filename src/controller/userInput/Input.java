@@ -100,4 +100,21 @@ public class Input {
                 }
         }
     }
+    public String inputMenuChoice(){
+        Scanner input = new Scanner(System.in);
+        String choice = input.nextLine();
+        switch (choice){
+            case "1":
+            case "2":
+            case "3":
+            case "4":
+            case "5":
+            case "x":
+                return choice;
+            default:
+                toScreen.displayInvalidAndTryAgain();
+                toScreen.displayMenu();
+                return inputMenuChoice();
+        }
+    }
 }

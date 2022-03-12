@@ -1,10 +1,8 @@
 package view;
 
 public class Client {
-    public static Proxy proxy = new Proxy();
+    public static EmployeeManager employeeManager = new EmployeeManager();
     public static void main(String[] args) {
-        proxy.displayAllList();
-        proxy.setEmp();
-        proxy.searchEmployee();
+        employeeManager.exe();
     }
 }

@@ -94,6 +94,21 @@ public class ToScreen {
         System.out.println("1.Yes  2.No");
         System.out.print("Continue setting: ");
     }
+    public void displayMenu(){
+        System.out.println("--Employee Manager Menu-- ");
+        System.out.println("1.Display all employee.");
+        System.out.println("2.Add new employee.");
+        System.out.println("3.Remove an employee.");
+        System.out.println("4.Search employee(s).");
+        System.out.println("5.Set-up information of an employee.");
+        System.out.println("x.Exit");
+        System.out.print("\nYour choice: ");
+    }
+    //done!
+    public void displayExiting(){
+        System.out.println("Exiting! See you later!");
+    }
+
     public void inputId(){
         System.out.print("Enter Id: ");
     }

@@ -1,5 +1,5 @@
 package view;
-public interface IProxy {
+public interface IProxyEmployeeManager {
 
      void waitASec();
      void addEmp();

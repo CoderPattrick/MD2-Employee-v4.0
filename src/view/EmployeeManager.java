@@ -1,6 +1,5 @@
 package view;
 
-import controller.employeeManager.EmployeeManager;
 import controller.employeeManager.*;
 import controller.getEmployeeInfo.*;
 import controller.infoDisplayer.ToScreen;
@@ -10,8 +9,8 @@ import storage.IOManager;
 
 import java.util.ArrayList;
 
-public class Proxy implements IProxy {
-    EmployeeManager empManager;
+public class EmployeeManager implements IProxyEmployeeManager,Cmd {
+    controller.employeeManager.EmployeeManager empManager;
     GetEmployeeDetail getter = new GetDetail();
     SetValidDetail empTypeSetter = new SetValid();
     ToScreen toScreen = new ToScreen();
@@ -76,8 +75,6 @@ public class Proxy implements IProxy {
         Employee removeTarget = getter.getEmployeeById(id);
         if(removeTarget==null){
             toScreen.displayEmpNotFound();
-            toScreen.lazyLoad1sec();
-            toScreen.displayBackToMenu();
         }else {
             toScreen.displayEmp(removeTarget);
             toScreen.displayConfirm();
@@ -86,10 +83,10 @@ public class Proxy implements IProxy {
                 savedList.remove(removeTarget);
                 IOTool.writeFile(savedList);
                 toScreen.displayCompletion();
-                toScreen.lazyLoad1sec();
-                toScreen.displayBackToMenu();
             }
         }
+        toScreen.lazyLoad1sec();
+        toScreen.displayBackToMenu();
     }
     //done!
     @Override
@@ -169,6 +166,7 @@ public class Proxy implements IProxy {
             boolean continueSetup = true;
             empManager.setter.tempEmp = target;
             while (continueSetup) {
+                toScreen.displayEmp(target);
                 toScreen.displayEmpInfoToSet(type);
                 String choice = input.inputChoiceOfSetting(type);
                 switch (choice) {
@@ -229,6 +227,36 @@ public class Proxy implements IProxy {
     @Override
     public void displayAllList() {
         toScreen.displayAllList();
+        toScreen.displayCompletion();
+        toScreen.lazyLoad1sec();
+        toScreen.displayBackToMenu();
     }
     //done!
+    @Override
+    public void exe() {
+        String choice="";
+        while(!choice.equals("x")){
+            toScreen.displayMenu();
+            choice = input.inputMenuChoice();
+            switch (choice){
+                case "1":
+                    displayAllList();
+                    break;
+                case "2":
+                    addEmp();
+                    break;
+                case "3":
+                    removeEmp();
+                    break;
+                case "4":
+                    searchEmployee();
+                    break;
+                case "5":
+                    setEmp();
+                    break;
+                case "x":
+                    toScreen.displayExiting();
+            }
+        }
+    }
 }

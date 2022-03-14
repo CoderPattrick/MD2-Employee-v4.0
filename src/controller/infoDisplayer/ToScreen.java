@@ -1,6 +1,9 @@
 package controller.infoDisplayer;
 
 import model.employee.Employee;
+import model.employee.FullTimeEmp;
+import model.employee.Leader;
+import model.employee.PartTimeEmp;
 import storage.IOManager;
 
 import java.util.ArrayList;
@@ -8,7 +11,34 @@ import java.util.Scanner;
 
 public class ToScreen {
     public static ArrayList<Employee> savedList = IOManager.savedList;
+    public static DisplaySupporter supporter = new DisplaySupporter();
 
+    public void displayEmpListByType(){
+        for (Employee e:savedList
+        ) {
+            if(e instanceof FullTimeEmp){
+                System.out.println(e);
+            }
+        }
+        System.out.println("");
+        for (Employee e:savedList
+        ) {
+            if(e instanceof PartTimeEmp){
+                System.out.println(e);
+            }
+        }
+        System.out.println("");
+        for (Employee e:savedList
+        ) {
+            if(e instanceof Leader){
+                System.out.println(e);
+            }
+        }
+    }
+    public void displaySortedListByAge(){
+    supporter.sortEmpListByAge();
+    displayAllList();
+    }
     public void displayAllList(){
         for (Employee e:savedList
              ) {
@@ -105,10 +135,17 @@ public class ToScreen {
         System.out.print("\nYour choice: ");
     }
     //done!
+    public void displayKindOfDisplay(){
+        System.out.println("1. Display by Default.");
+        System.out.println("2. By age.");
+        System.out.println("3. By type of Employee.");
+        System.out.print("\nYour choice: ");
+    }
+
     public void displayExiting(){
         System.out.println("Exiting! See you later!");
     }
-
+    //done!
     public void inputId(){
         System.out.print("Enter Id: ");
     }

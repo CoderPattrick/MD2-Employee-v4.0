@@ -9,7 +9,7 @@ import storage.IOManager;
 
 import java.util.ArrayList;
 
-public class EmployeeManager implements IProxyEmployeeManager,Cmd {
+public class EmployeeManager implements IFacadeEmployeeManager,Cmd {
     controller.employeeManager.EmployeeManager empManager;
     GetEmployeeDetail getter = new GetDetail();
     SetValidDetail empTypeSetter = new SetValid();
@@ -226,7 +226,18 @@ public class EmployeeManager implements IProxyEmployeeManager,Cmd {
     //done!
     @Override
     public void displayAllList() {
-        toScreen.displayAllList();
+        toScreen.displayKindOfDisplay();
+        String choice = input.inputKindOfDisplay();
+        switch (choice){
+            case "1":
+                toScreen.displayAllList();
+                break;
+            case "2":
+                toScreen.displaySortedListByAge();
+                break;
+            case "3":
+                toScreen.displayEmpListByType();
+        }
         toScreen.displayCompletion();
         toScreen.lazyLoad1sec();
         toScreen.displayBackToMenu();
@@ -259,4 +270,5 @@ public class EmployeeManager implements IProxyEmployeeManager,Cmd {
             }
         }
     }
+    //done!
 }

@@ -1,5 +1,5 @@
 package view;
-public interface IProxyEmployeeManager {
+public interface IFacadeEmployeeManager {
 
      void waitASec();
      void addEmp();

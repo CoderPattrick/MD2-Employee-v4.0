@@ -113,8 +113,22 @@ public class Input {
                 return choice;
             default:
                 toScreen.displayInvalidAndTryAgain();
+                toScreen.lazyLoad1sec();
                 toScreen.displayMenu();
                 return inputMenuChoice();
+        }
+    }
+    public String inputKindOfDisplay(){
+        Scanner input = new Scanner(System.in);
+        String choice = input.nextLine();
+        switch(choice){
+            case "1":
+            case "2":
+            case "3":
+                return choice;
+            default:
+                toScreen.displayInvalidAndTryAgain();
+                return inputKindOfDisplay();
         }
     }
 }

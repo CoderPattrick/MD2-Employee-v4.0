@@ -29,7 +29,7 @@ public class IOManager {
         } catch (IOException e) {
             System.err.println("Something wrong, cant read file!");
         } catch (ClassNotFoundException e) {
-            System.err.println("Type of data in file is invalid, cant read!");;
+            System.err.println("Type of data in file is invalid, cant read!");
         }
         return new ArrayList<>();
     }

@@ -1,6 +1,7 @@
 package model.employee;
 
 import java.io.Serializable;
+import java.util.Comparator;
 
 public abstract class Employee implements Serializable {
     public String getId() {
